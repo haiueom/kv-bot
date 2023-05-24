@@ -1,0 +1,25 @@
+{
+    "name": "kv-bot",
+    "version": "1.0.0",
+    "description": "Discord bot made with discord.js",
+    "main": "index.js",
+    "scripts": {
+        "start": "node deploy-commands.js && node index.js",
+        "dev": "node index.js",
+        "reg": "node deploy-commands.js",
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix",
+        "format": "prettier --write **/*.{js,jsx,ts,tsx,css,md,json}"
+    },
+    "author": "Ilham Taufiq",
+    "dependencies": {
+        "discord.js": "^14.10.2",
+        "dotenv": "^16.0.3",
+        "undici": "^5.22.1"
+    },
+    "devDependencies": {
+        "eslint": "^8.41.0",
+        "eslint"^8.8.0",
+        "prettier": "^1.19.1"
+    }
+}
