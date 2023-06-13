@@ -10,7 +10,7 @@ module.exports = {
         const msg = new EmbedBuilder()
             .setColor(cfg.color2)
             .setFooter({
-                text: interaction.client.user.username
+                text: interaction.client.user.username,
             })
             .setTitle('**Pong!**')
             .setDescription(`\`\`\`${Math.round(interaction.client.ws.ping)}ms\`\`\``)
@@ -18,7 +18,7 @@ module.exports = {
             .setImage(cfg.pingBanner);
         return interaction.reply({
             embeds: [msg],
-            ephemeral: true
+            ephemeral: true,
         });
-    }
+    },
 };

@@ -1,6 +1,6 @@
 module.exports = {
     // get a member lol
-    getMember: function(message, toFind = '') {
+    getMember: function (message, toFind = '') {
         try {
             toFind = toFind.toLowerCase();
             let target = message.guild.members.get(toFind);
@@ -8,7 +8,7 @@ module.exports = {
                 target = message.mentions.members.first();
             }
             if (!target && toFind) {
-                target = message.guild.members.find(member => {
+                target = message.guild.members.find((member) => {
                     return (
                         member.displayName.toLowerCase().includes(toFind) ||
                         member.user.tag.toLowerCase().includes(toFind)
@@ -22,7 +22,7 @@ module.exports = {
         }
     },
     // changeging the duration from ms to a date
-    duration: function(ms) {
+    duration: function (ms) {
         const sec = Math.floor((ms / 1000) % 60).toString();
         const min = Math.floor((ms / (60 * 1000)) % 60).toString();
         const hrs = Math.floor((ms / (60 * 60 * 1000)) % 60).toString();
@@ -31,7 +31,7 @@ module.exports = {
         return `${days} Days︲${hrs} Hours︲${min} Minutes︲${sec} Seconds`;
     },
     // function for awaiting reactions
-    promptMessage: async function(message, author, time, validReactions) {
+    promptMessage: async function (message, author, time, validReactions) {
         try {
             time *= 1000;
             for (const reaction of validReactions) {
@@ -42,17 +42,17 @@ module.exports = {
             return message
                 .awaitReactions(filter, {
                     max: 1,
-                    time
+                    time,
                 })
-                .then(collected => collected.first() && collected.first().emoji.name);
+                .then((collected) => collected.first() && collected.first().emoji.name);
         } catch (e) {
             console.log(String(e.stack).bgRed);
         }
     },
     // Function to wait some time
-    delay: function(delayInms) {
+    delay: function (delayInms) {
         try {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve(2);
                 }, delayInms);
@@ -62,7 +62,7 @@ module.exports = {
         }
     },
     // randomnumber between 0 and x
-    getRandomInt: function(max) {
+    getRandomInt: function (max) {
         try {
             return Math.floor(Math.random() * Math.floor(max));
         } catch (e) {
@@ -70,7 +70,7 @@ module.exports = {
         }
     },
     // random number between y and x
-    getRandomNum: function(min, max) {
+    getRandomNum: function (min, max) {
         try {
             return Math.floor(Math.random() * Math.floor(max - min + min));
         } catch (e) {
@@ -78,7 +78,7 @@ module.exports = {
         }
     },
     // function for creating a bar
-    createBar: function(maxtime, currenttime, size = 25, line = '▬', slider = '🔶') {
+    createBar: function (maxtime, currenttime, size = 25, line = '▬', slider = '🔶') {
         try {
             const bar =
                 currenttime > maxtime
@@ -88,19 +88,21 @@ module.exports = {
                               .repeat(Math.round((size / 2) * (currenttime / maxtime)))
                               .replace(/.$/, slider) +
                               line.repeat(size - Math.round(size * (currenttime / maxtime)) + 1),
-                          currenttime / maxtime
+                          currenttime / maxtime,
                       ];
             if (!String(bar).includes('🔶')) {
                 return `**[🔶${line.repeat(size - 1)}]**\n**00:00:00 / 00:00:00**`;
             }
-            return `**[${bar[0]}]**\n**${new Date(currenttime).toISOString().substr(11, 8) +
+            return `**[${bar[0]}]**\n**${
+                new Date(currenttime).toISOString().substr(11, 8) +
                 ' / ' +
-                (maxtime === 0 ? ' ◉ LIVE' : new Date(maxtime).toISOString().substr(11, 8))}**`;
+                (maxtime === 0 ? ' ◉ LIVE' : new Date(maxtime).toISOString().substr(11, 8))
+            }**`;
         } catch (e) {
             console.log(String(e.stack).bgRed);
         }
     },
-    format: function(millis) {
+    format: function (millis) {
         try {
             const h = Math.floor(millis / 3600000);
             const m = Math.floor(millis / 60000);
@@ -135,14 +137,14 @@ module.exports = {
             console.log(String(e.stack).bgRed);
         }
     },
-    escapeRegex: function(str) {
+    escapeRegex: function (str) {
         try {
             return str.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`);
         } catch (e) {
             console.log(String(e.stack).bgRed);
         }
     },
-    arrayMove: function(array, from, to) {
+    arrayMove: function (array, from, to) {
         try {
             array = [...array];
             const startIndex = from < 0 ? array.length + from : from;
@@ -155,7 +157,7 @@ module.exports = {
         } catch (e) {
             console.log(String(e.stack).bgRed);
         }
-    }
+    },
 };
 
 /** Template by Tomato#6966 | https://github.com/Tomato6966/Discord-Js-Handler-Template */

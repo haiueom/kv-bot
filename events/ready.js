@@ -10,8 +10,8 @@ module.exports = {
         setInterval(() => {
             client.user.setActivity({
                 name: `${client.guilds.cache.size} servers`,
-                type: ActivityType.Watching
+                type: ActivityType.Watching,
             });
         }, 3600000);
-    }
+    },
 };

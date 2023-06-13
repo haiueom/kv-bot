@@ -8,11 +8,8 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('help')
         .setDescription('Show all commands')
-        .addStringOption(option =>
-            option
-                .setName('command')
-                .setDescription('Command name')
-                .setRequired(false)
+        .addStringOption((option) =>
+            option.setName('command').setDescription('Command name').setRequired(false)
         ),
     async execute(interaction, cfg) {
         if (interaction.options.getString('command')) {
@@ -33,13 +30,13 @@ module.exports = {
                 );
                 return interaction.reply({
                     embeds: [msg],
-                    ephemeral: true
+                    ephemeral: true,
                 });
             }
             if (cmd.name) {
                 msg.addFields({
                     name: '**Command name**',
-                    value: `\`${cmd.name}\``
+                    value: `\`${cmd.name}\``,
                 });
             }
             if (cmd.name) {
@@ -48,29 +45,29 @@ module.exports = {
             if (cmd.description) {
                 msg.addFields({
                     name: '**Description**',
-                    value: `\`${cmd.description}\``
+                    value: `\`${cmd.description}\``,
                 });
             }
             if (cmd.cooldown) {
                 msg.addFields({
                     name: '**Cooldown**',
-                    value: `\`${cmd.cooldown} Seconds\``
+                    value: `\`${cmd.cooldown} Seconds\``,
                 });
             } else {
                 msg.addFields({
                     name: '**Cooldown**',
-                    value: `\`${cfg.defaultCommandCooldown} Seconds\``
+                    value: `\`${cfg.defaultCommandCooldown} Seconds\``,
                 });
             }
             if (cmd.usage) {
                 msg.addFields({ name: '**Usage**', value: `\`${cmd.usage}\`` });
                 msg.setFooter({
-                    text: `Syntax: <> = required, [] = optional`
+                    text: `Syntax: <> = required, [] = optional`,
                 });
             }
             return interaction.reply({
                 embeds: [msg],
-                ephemeral: true
+                ephemeral: true,
             });
         } else {
             const msg = new EmbedBuilder()
@@ -79,13 +76,13 @@ module.exports = {
                 .setTitle('HELP MENU 🔰 Commands')
                 .setFooter({
                     text: 'To see command descriptions and inforamtion, type: /help [CMD NAME]',
-                    iconURL: interaction.client.user.displayAvatarURL()
+                    iconURL: interaction.client.user.displayAvatarURL(),
                 });
 
-            const commands = category => {
+            const commands = (category) => {
                 return interaction.client.commands
-                    .filter(cmd => cmd.category === category)
-                    .map(cmd => `\`${cmd.name}\``);
+                    .filter((cmd) => cmd.category === category)
+                    .map((cmd) => `\`${cmd.name}\``);
             };
 
             try {
@@ -106,17 +103,17 @@ module.exports = {
                         {
                             name: `**${current.toUpperCase()} [${items.length}]**`,
                             value: `> ${result[0].join('\n> ')}`,
-                            inline: true
+                            inline: true,
                         },
                         {
                             name: `\u200b`,
                             value: `${result[1].join('\n') ? result[1].join('\n') : '\u200b'}`,
-                            inline: true
+                            inline: true,
                         },
                         {
                             name: `\u200b`,
                             value: `${result[2].join('\n') ? result[2].join('\n') : '\u200b'}`,
-                            inline: true
+                            inline: true,
                         }
                     );
                 }
@@ -126,5 +123,5 @@ module.exports = {
 
             return interaction.reply({ embeds: [msg] });
         }
-    }
+    },
 };

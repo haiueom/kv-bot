@@ -13,7 +13,7 @@ module.exports = {
         const msg = new EmbedBuilder()
             .setColor(cfg.color2)
             .setFooter({
-                text: interaction.client.user.username
+                text: interaction.client.user.username,
             })
             .setTitle('**Uptime**')
             .setDescription(`\`\`\`${duration(interaction.client.uptime)}\`\`\``)
@@ -21,7 +21,7 @@ module.exports = {
             .setImage(cfg.uptimeBanner);
         return interaction.reply({
             embeds: [msg],
-            ephemeral: true
+            ephemeral: true,
         });
-    }
+    },
 };

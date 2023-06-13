@@ -9,12 +9,12 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('read')
         .setDescription('Listing keys or get value from a key.')
-        .addStringOption(option => option.setName('key').setDescription('The key to read.')),
+        .addStringOption((option) => option.setName('key').setDescription('The key to read.')),
     async execute(interaction, cfg, env) {
         const msg = new EmbedBuilder()
             .setColor(cfg.color2)
             .setFooter({
-                text: interaction.client.user.username
+                text: interaction.client.user.username,
             })
             .setTimestamp();
 
@@ -24,48 +24,48 @@ module.exports = {
             const { statusCode, body } = await request(`${cfg.kvApiEndpoint}/${key}`, {
                 method: 'GET',
                 headers: {
-                    'x-access-key': env.KV_ACCESS_KEY
-                }
+                    'x-access-key': env.KV_ACCESS_KEY,
+                },
             });
 
             msg.setTitle('**Read KV**').addFields(
                 {
                     name: '**Status Code**',
-                    value: `\`${statusCode}\``
+                    value: `\`${statusCode}\``,
                 },
                 {
                     name: '**Body JSON**',
-                    value: `\`\`\`${JSON.stringify(await body.json(), null, 2)}\`\`\``
+                    value: `\`\`\`${JSON.stringify(await body.json(), null, 2)}\`\`\``,
                 }
             );
 
             return await interaction.reply({
                 embeds: [msg],
-                ephemeral: true
+                ephemeral: true,
             });
         }
 
         const { statusCode, body } = await request(cfg.kvApiEndpoint, {
             method: 'GET',
             headers: {
-                'x-access-key': env.KV_ACCESS_KEY
-            }
+                'x-access-key': env.KV_ACCESS_KEY,
+            },
         });
 
         msg.setTitle('**Read All Keys**').addFields(
             {
                 name: '**Status Code**',
-                value: `\`${statusCode}\``
+                value: `\`${statusCode}\``,
             },
             {
                 name: '**Body JSON**',
-                value: `\`\`\`${JSON.stringify(await body.json(), null, 2)}\`\`\``
+                value: `\`\`\`${JSON.stringify(await body.json(), null, 2)}\`\`\``,
             }
         );
 
         return await interaction.reply({
             embeds: [msg],
-            ephemeral: true
+            ephemeral: true,
         });
-    }
+    },
 };

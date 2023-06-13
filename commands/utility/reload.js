@@ -8,11 +8,8 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('reload')
         .setDescription('Reloads a command.')
-        .addStringOption(option =>
-            option
-                .setName('command')
-                .setDescription('The command to reload.')
-                .setRequired(true)
+        .addStringOption((option) =>
+            option.setName('command').setDescription('The command to reload.').setRequired(true)
         ),
     async execute(interaction, cfg) {
         const commandName = interaction.options.getString('command', true).toLowerCase();
@@ -21,7 +18,7 @@ module.exports = {
         if (!command) {
             return interaction.reply({
                 content: `There is no command with name \`${commandName}\`!`,
-                ephemeral: true
+                ephemeral: true,
             });
         }
 
@@ -36,7 +33,7 @@ module.exports = {
         const msg = new EmbedBuilder()
             .setColor(cfg.color2)
             .setFooter({
-                text: interaction.client.user.username
+                text: interaction.client.user.username,
             })
             .setTitle('**Reload**')
             .setDescription(`\`\`\`${command.data.name} was reloaded!\`\`\``)
@@ -44,7 +41,7 @@ module.exports = {
             .setImage(cfg.reloadBanner);
         return interaction.reply({
             embeds: [msg],
-            ephemeral: true
+            ephemeral: true,
         });
-    }
+    },
 };

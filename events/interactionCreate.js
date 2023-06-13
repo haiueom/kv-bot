@@ -13,7 +13,7 @@ module.exports = {
         if (interaction.user.id !== config.ownerId) {
             return await interaction.reply({
                 content: 'You are not allowed to use this bot.',
-                ephemeral: true
+                ephemeral: true,
             });
         }
 
@@ -41,7 +41,7 @@ module.exports = {
                 const expiredTimestamp = Math.round(expirationTime / 1000);
                 const message = await interaction.reply({
                     content: `Please wait, you are on a cooldown for \`${command.data.name}\`. You can use it again <t:${expiredTimestamp}:R>.`,
-                    ephemeral: true
+                    ephemeral: true,
                 });
 
                 setTimeout(() => {
@@ -63,13 +63,13 @@ module.exports = {
                 .setTitle(`❌ ERROR | An error occurred`)
                 .setDescription(`\`\`\`${e.stack}\`\`\``)
                 .setFooter({
-                    text: interaction.client.user.username
+                    text: interaction.client.user.username,
                 })
                 .setTimestamp();
             await interaction.reply({
                 embeds: [msg],
-                ephemeral: true
+                ephemeral: true,
             });
         }
-    }
+    },
 };
